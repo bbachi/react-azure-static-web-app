@@ -26,3 +26,9 @@ export async function editTask(data) {
     })
     return await response.json();
 }
+
+export async function fetchSettings() {
+
+    const response = await fetch('/api/settings');
+    return await response.json();
+}

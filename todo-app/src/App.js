@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Header from './components/Header'
 import { Tasks } from './components/Tasks'
 import CreateTask from './components/CreateTask'
-import { getAllTasks, deleteTask } from './services/TodoService'
+import { getAllTasks, deleteTask, fetchSettings } from './services/TodoService'
 
 function App() {
 
   const [tasks, setTasks] = useState([])
   const [numberOfTasks, setNumberOfTasks] = useState([])
   const [isTaskEdited, setTaskEdited] = useState(false)
+  const [appSettings, setAppSettings] = useState({});
 
   useEffect(() => {
     getAllTasks().then(tasks => {
@@ -18,6 +19,16 @@ function App() {
         setTasks(tasks)
       });
   }, [numberOfTasks, isTaskEdited])
+
+  useEffect( () => {
+    async function fetchData() {
+      const response = await fetchSettings();
+    
+      setAppSettings(response);
+    }
+    fetchData();
+    
+  },[])
 
   function delTask(taskId) {
       deleteTask(taskId).then(response => {
@@ -36,7 +47,7 @@ function App() {
     
   return (
     <div className="App">
-      <Header></Header>
+      <Header appSettings={appSettings}></Header>
       <div className="container mrgnbtm">
         <div className="row">
           <div className="col-md-12">
