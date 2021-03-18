@@ -9,7 +9,7 @@ const Detail = () => {
 
     return (
         <div className="">
-           <Header/>
+        
            <Jumbotron fluid>
                 <Container>
                     <h1>Task Detail</h1>
