@@ -1,7 +1,6 @@
 import React from 'react'
 import EditTaskModal from './EditTaskModal'
 import {
-    Link,
     useHistory
   } from "react-router-dom";
 
