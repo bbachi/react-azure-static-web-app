@@ -1,15 +1,28 @@
 import React from 'react'
 import EditTaskModal from './EditTaskModal'
+import {
+    Link,
+    useHistory
+  } from "react-router-dom";
 
 export const Tasks = ({tasks, deleteTask, taskEdited}) => {
+
+    const history = useHistory();
 
     console.log('tasks length:::', tasks)
     if (tasks.length === 0) return null
 
+    
+
+    const detail = (task) => {
+        localStorage.setItem("task", JSON.stringify(task));
+        history.push("/detail");
+    }
+
     const TaskRow = (task,index) => {
 
         return(
-              <tr key = {index} className={index%2 === 0?'odd':'even'}>
+              <tr onClick={() => detail(task)} key = {index} className={index%2 === 0?'odd':'even'}>
                   <td>{task.id}</td>
                   <td>{task.task}</td>
                   <td>{task.assignee}</td>
@@ -22,7 +35,7 @@ export const Tasks = ({tasks, deleteTask, taskEdited}) => {
                             <EditTaskModal task={task} taskEdited={taskEdited}/>
                         </div>
                         <div className="col-md-3">
-                        <button type="button" onClick={(e) => deleteTask(task.id)} className="btn btn-danger right">Delete</button>
+                          <button type="button" onClick={(e) => deleteTask(task.id)} className="btn btn-danger right">Delete</button>
                         </div>
                     </div>
                   </td>
