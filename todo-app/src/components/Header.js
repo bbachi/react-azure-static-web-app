@@ -1,10 +1,18 @@
 import React from 'react';
 
-const Header = () => {
+const Header = ({appSettings}) => {
+
+    console.log("headerColor", appSettings)
+    const { headerColor, headerTitleColor } = appSettings
+    if (!headerColor) {
+        return null;
+    }
 
     return (
-        <div className="header">
-            <h1>Azure Static Web Apps With React Demo</h1>
+        <div style={{backgroundColor: headerColor}} className="header">
+            <h1 style={{color: headerTitleColor}}>
+                Azure Static Web Apps With React Demo
+            </h1>
         </div>
     )
 }
