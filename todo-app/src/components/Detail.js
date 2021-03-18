@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './Header'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Container from 'react-bootstrap/Container'
 
